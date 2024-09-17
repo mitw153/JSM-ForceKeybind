@@ -1,0 +1,26 @@
+{
+	"schemaVersion": 1,
+	"id": "${modid}",
+	"version": "${version}",
+	"name": "ForceKeybind",
+	"authors": [
+		"mitw153"
+	],
+	"license": "BSD Zero Clause License",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+		  "mitw153.forcekeybind.ForceKeybind"
+		]
+	},
+	"mixins": [
+		"${modid}.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${fabric_loader_version}",
+		"minecraft": ">=${min_minecraft_version} <=${max_minecraft_version}",
+		"java": ">=${java_version}",
+		"fabric-api": ">=${fabric_api_version}",
+	  	"jsmacros": "*"
+	}
+}

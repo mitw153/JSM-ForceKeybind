@@ -1,0 +1,49 @@
+plugins {
+	id "fabric-loom" version "1.7-SNAPSHOT"
+}
+
+version = project.mod_version
+group = project.maven_group
+String modid = base.archivesName = project.archives_base_name
+
+loom.runs {
+	remove server
+}
+
+repositories {
+	maven { url = "https://api.modrinth.com/maven" }
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.minecraft_version}+build.${project.yarn_build_number}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}+${project.minecraft_version}"
+	modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
+	modRuntimeOnly "maven.modrinth:auth-me:${authme_version}"
+	modRuntimeOnly "maven.modrinth:cloth-config:${clothconfig_version}"
+	modImplementation files("include/jsmacros-1.21.1-2.0.0-fabric.jar")
+}
+
+processResources {
+	filesMatching(["fabric.mod.json", "${modid}.mixins.json".toString()]) {
+		expand([
+			"modid": modid,
+			"version": version,
+			"min_minecraft_version": min_minecraft_version,
+			"max_minecraft_version": max_minecraft_version,
+			"java_version": java_version,
+			"fabric_loader_version": fabric_loader_version,
+			"fabric_api_version": fabric_api_version
+		])
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = "UTF-8"
+	options.release = java_version.toInteger()
+}
+
+remapJar {
+	archiveClassifier = "fabric"
+}
