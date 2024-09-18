@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ForceKeybind implements ClientModInitializer {
-	public static final String MOD_ID = "scriptlab";
+	public static final String MOD_ID = "forcekeybind";
 	@SuppressWarnings("unused")
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static MinecraftClient mc;
